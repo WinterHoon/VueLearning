@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <div id='app'>
+    <!-- 但如果涉及多个条件判断一般不用v-else-if，而是调用方法，把条件判断逻辑写在方法里 -->
+    <h1 v-if="score>=90">优秀</h1>
+    <h1 v-else-if="score>=80">良好</h1>
+    <h1 v-else-if="score>=60">及格</h1>
+    <h1 v-else>不及格</h1>
+  </div>
+  <script src='../JS/vue.js'></script>
+  <script>
+    const app = new Vue({
+      el: '#app',
+      data: {
+      message: 'HelloWinter',
+      score: 85
+      }
+    });
+  </script>
+</body>
+</html>

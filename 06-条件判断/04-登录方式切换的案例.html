@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <div id='app'>
+    <span v-if="isShow">
+      <label for="userName">用户账号：</label>
+      <!-- 如果不加key标识，vue的底层渲染会复用input -->
+      <input id="userName" type="text" placeholder="用户账号" key="userName">
+    </span>
+    <span v-else>
+      <label for="email">邮箱账号：</label>
+      <input id="email" type="text" placeholder="邮箱账号" key="email">
+    </span>
+
+    <button @click="isShow = !isShow">切换类型</button>
+  </div>
+  <script src='../JS/vue.js'></script>
+  <script>
+    const app = new Vue({
+      el: '#app',
+      data: {
+      message: 'HelloWinter',
+      isShow: true
+      }
+    });
+  </script>
+</body>
+</html>
