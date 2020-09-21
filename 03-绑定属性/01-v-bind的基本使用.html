@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div id='app'>
+        <h1>{{ message }}</h1>
+        <img v-bind:src="imgURL" alt="#">
+        <a v-bind:href="alink">vue课程链接</a>
+
+        <!-- 语法糖写法 -->
+        <img :src="imgURL" alt="#">
+        <a :href="alink">vue课程链接</a>
+    </div>
+    <script src='../JS/vue.js'></script>
+    <script>
+        const app = new Vue({
+            el: '#app',
+            data: {
+            message: 'HelloWinter',
+            imgURL: "https://img30.360buyimg.com/babel/s590x470_jfs/t1/124597/26/12838/101837/5f640e68E2f0d0bed/2a3d4deb9391fa91.jpg.webp",
+            alink: "https://www.bilibili.com/video/BV15741177Eh?p=15"
+            }
+        });
+    </script>
+</body>
+</html>

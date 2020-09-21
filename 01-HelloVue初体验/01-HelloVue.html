@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div id="app">
+        <h1>{{ message }}</h1>
+        <h2>{{ name }}</h2>
+    </div>
+    <div>{{ message }}</div>
+    <script src="../JS/vue.js"></script>
+    <script>
+        const app = new Vue({
+            el: '#app',
+            data: {
+                message: "HelloWinter",
+                name: "WinterHoon"
+            }
+        })
+        //原始JS和JQuery的做法（编程范式：命令式编程）
+        //1. 创建div元素，设置id属性
+        // 2. 定义一个变量message
+        // 3.将message变量放在前面的div中显示
+
+        //而这里用的是声明式编程
+    </script>
+</body>
+</html>

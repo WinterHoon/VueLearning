@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div id='app'>
+        <h1>{{ fullName }}</h1>
+    </div>
+    <script src='../JS/vue.js'></script>
+    <script>
+        const app = new Vue({
+            el: '#app',
+            data: {
+            firstName: 'Winter',
+            lastName: 'Hoon'
+            },
+            computed: {
+                //其实计算属性确实是一个属性，它的值是一个对象，对象里有set和get两个属性，分别是两个方法，当赋值和取值
+                //操作时会自动调用对应的方法。而因为set方法并不常用，所以便有了之前的简写方式，显得计算属性是一个方法。
+                fullName: {
+                    //set方法并不常用，但也有用
+                    set: function(newValue) {
+                        let names = newValue.split(' ');
+                        this.firstName = names[0];
+                        this.lastName = names[1];
+                    },
+                    get: function() {
+                        return this.firstName + ' ' + this.lastName;
+                    }
+                }
+
+//                                           ||
+//                                          \||/
+//                                           \/
+                // fullName: {
+                //     get: function() {
+                //         return this.firstName + ' ' + this.lastName;
+                //     }
+                // }
+//                                           ||
+//                                          \||/
+//                                           \/
+                // fullName: function() {
+                //     return this.firstName + ' ' + this.lastName;
+                // }
+            }
+        });
+    </script>
+</body>
+</html>

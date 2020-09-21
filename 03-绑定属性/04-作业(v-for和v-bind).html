@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .active {
+            color: red;
+        }
+    </style>
+</head>
+<body>
+    <div id="app">
+        <h1>{{ title }}</h1>
+        <ul>
+            <li v-on:mouseover="getIndex(index)" v-bind:class="{active: index === currentIndex}" v-for="(movie,index) in movies">{{movie}}</li>
+        </ul>
+    </div>
+    <script src="../JS/vue.js"></script>
+    <script>
+        const app = new Vue({
+            el: "#app",
+            data: {
+                title: "童年经典动画片",
+                movies: ["黑猫警长", "舒克和贝塔", "天书奇谈", "三个和尚没水喝"],
+                currentIndex: 0
+            },
+            methods: {
+                getIndex:function(index) {
+                    this.currentIndex = index;
+                }
+            }
+        });
+    </script>
+</body>
+</html>

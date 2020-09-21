@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .active {
+            color: red;
+        }
+        .inline {
+            display: inline;
+        }
+    </style>
+</head>
+<body>
+    <div id='app'>
+        <h1 :class="[active, inline]">{{ message }}</h1>
+        <a href="">超链接</a>
+    </div>
+    <script src='../JS/vue.js'></script>
+    <script>
+        const app = new Vue({
+            el: '#app',
+            data: {
+            message: 'HelloWinter',
+            active: "active",
+            inline: "inline"
+            }
+        });
+    </script>
+</body>
+</html>

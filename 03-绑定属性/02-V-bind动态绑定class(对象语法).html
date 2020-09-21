@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .active {
+            color: red;
+        }
+    </style>
+</head>
+<body>
+    <div id='app'>
+        <h1 v-bind:class="{active: isActive}">{{ message }}</h1>
+        <h2 :class="getClass()">你好啊</h2>
+        <button v-on:click="changeColor">变色按钮</button>
+    </div>
+    <script src='../JS/vue.js'></script>
+    <script>
+        const app = new Vue({
+            el: '#app',
+            data: {
+            message: 'HelloWinter',
+            isActive: true
+            },
+            methods: {
+                changeColor: function() {
+                    this.isActive = !this.isActive;
+                },
+                getClass: function() {
+                    return {active: this.isActive};
+                }
+            }
+        });
+    </script>
+</body>
+</html>

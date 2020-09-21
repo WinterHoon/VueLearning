@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div id="app">
+        <h2>{{ title }}</h2>
+        <ul>
+            <li v-for="item in movies">{{ item }}</li>
+        </ul>
+    </div>
+    <script src="../JS/vue.js"></script>
+    <script>
+        const app = new Vue({
+            el: '#app',
+            data: {
+                title: "近期热门电影",
+                movies: ['星际穿越', '老男孩', '假如爱有天意', '色戒']
+            }
+        });
+
+    // v-for="item in movies"，遍历列表
+    </script>
+</body>
+</html>
