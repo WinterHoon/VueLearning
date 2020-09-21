@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <div id='app'>
+    <!-- .stop修饰符可以阻止事件的冒泡,其实也就是调用了event.stopPropgation()-->
+   <div @click="divClick">
+     <button @click.stop="btnClick">按钮</button>
+   </div>
+
+    <!-- .prevent修饰符可以阻止事件的默认行为，其实也就是调用了event.preventDefault() -->
+    <br/>
+    <form action="#">
+      <input type="submit" value="提交" @click.prevent="submitClick">
+    </form>
+
+    <!-- .{keyCode|keyAlias} 只当事件是从特定键触发时才触发回调 -->
+    <input type="text" @keyup.enter="onEnter"> 
+
+    <!-- .once 只触发一次回调 -->
+  </div>
+  <script src='../JS/vue.js'></script>
+  <script>
+    const app = new Vue({
+      el: '#app',
+      data: {
+      message: 'HelloWinter'
+      },
+      methods: {
+        divClick() {
+          console.log("divClick");
+        },
+        btnClick() {
+          console.log("btnClick");
+        },
+        submitClick() {
+          console.log("submitClick");
+        },
+        onEnter(e) {
+          console.log(e.target.value);
+        }
+      }
+    });
+  </script>
+</body>
+</html>
