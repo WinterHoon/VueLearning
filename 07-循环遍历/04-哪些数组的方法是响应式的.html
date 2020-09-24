@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <div id='app'>
+    <h1 v-for="item in message">{{ item }}</h1>
+    <button v-on:click="btnClick">按钮</button>
+  </div>
+  <script src='../JS/vue.js'></script>
+  <script>
+    const app = new Vue({
+      el: '#app',
+      data: {
+        message: ['a', 'b', 'c', 'd']
+      },
+      methods: {
+        btnClick() {
+          //this.message.push('e');
+          //this.message.pop();
+          //this.message.shift();
+          //this.message.unshift('i');
+          //this.message.splice(1,2,'e');
+          //this.message.sort();
+          //this.message.reverse();
+          
+          //这种通过数组下标修改数组的方式不是响应式的
+          this.message[1] = 't';
+        }
+      }
+    });
+  </script>
+</body>
+</html>

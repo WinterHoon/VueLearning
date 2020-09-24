@@ -1,0 +1,14 @@
+body {
+  text-align: center;
+}
+#app {
+  width: 500px;
+  margin: 30px, 50px;
+}
+
+table,tr,th,td{
+  border: 1px solid gray;
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
