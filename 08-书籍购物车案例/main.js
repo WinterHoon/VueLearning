@@ -20,11 +20,7 @@ const app = new Vue({
   },
   methods: {
     decrement(book) {
-      if(book.number>1) {
-        book.number--;
-      } else {
-        this.deleteItem();
-      }
+      book.number--;
 
   
     },
@@ -33,6 +29,11 @@ const app = new Vue({
     },
     deleteItem(index) {
       this.books.splice(index, 1);
+    }
+  },
+  filters: {
+    showPrice(price) {
+      return '￥' + price.toFixed(2);
     }
   }
 });

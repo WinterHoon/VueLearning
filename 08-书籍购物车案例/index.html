@@ -25,9 +25,9 @@
             <td>{{ index + 1 }}</td>
             <td>{{ book.name }}</td>
             <td>{{ book.time }}</td>
-            <td>{{ '￥' + book.price }}</td>
+            <td>{{ book.price | showPrice }}</td>
             <td>
-              <button @click="decrement(book)">-</button>
+              <button @click="decrement(book)" :disabled="book.number <= 1">-</button>
               {{ book.number }}
               <button @click="increment(book)">+</button>
             </td>
@@ -37,10 +37,10 @@
           </tr>
         </tbody>
       </table>
-      <p>总价：{{ totalPrice }}</p>
+      <p>总价：{{ totalPrice | showPrice }}</p>
     </div>
     <div v-else>
-      <p>购物车为空</p>
+      <h2>购物车为空</h2>
     </div>
   </div>
   <script src="../JS/vue.js"></script>

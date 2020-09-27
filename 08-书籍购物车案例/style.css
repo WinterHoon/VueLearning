@@ -1,14 +1,22 @@
-body {
-  text-align: center;
-}
-#app {
-  width: 500px;
+
+/* #app {
+  width: 700px;
   margin: 30px, 50px;
+} */
+
+table {
+  border: 1px solid gray;
+  border-collapse: collapse;
 }
 
-table,tr,th,td{
+th, td {
+  padding: 8px 16px;
   border: 1px solid gray;
-  box-sizing: border-box;
-  margin: 0;
-  padding: 0;
+  text-align: left;
+}
+
+th {
+  background-color: #f7f7f7;
+  color: #5c6b77;
+  font-weight: 600;
 }
