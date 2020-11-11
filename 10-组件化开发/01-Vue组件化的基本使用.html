@@ -1,0 +1,42 @@
+<!-- 组件的使用分成三个步骤：
+  1.创建组件构造器；
+  2.注册组件；
+  3.使用组件。 -->
+  <!DOCTYPE html>
+  <html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+  </head>
+  <body>
+    <div id='app'>
+      <!-- 3.使用组件 -->
+      <!-- 组件必须挂载在某个Vue实例下，否则它不会生效 -->
+      <my-cpn></my-cpn>
+      <h1>{{ message }}</h1>
+    </div>
+    <my-cpn></my-cpn>
+    <script src='../JS/vue.js'></script>
+    <script>
+      //1.创建组件构造器
+      const cpn = Vue.extend({
+        template: `
+          <div>
+            <h2>我是标题</h2>
+            <p>我是内容1</p>
+            <p>我是内容2</p>
+          </div>`
+      });
+      //2.注册组件
+      Vue.component('my-cpn',cpn);
+
+      const app = new Vue({
+        el: '#app',
+        data: {
+          message: 'HelloWinter'
+        }
+      });
+    </script>
+  </body>
+  </html>

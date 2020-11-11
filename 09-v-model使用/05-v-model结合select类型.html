@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <div id='app'>
+    <!-- 1.选择一个 -->
+    <!-- 只能选择一个值，v-model绑定的是一个值，当我们选中option中的一个时，会将它对应的value赋值到data中 -->
+    <select name="fruit" v-model="fruit">
+      <option value="苹果">苹果</option>
+      <option value="香蕉">香蕉</option>
+      <option value="西瓜">西瓜</option>
+    </select>
+    <p>你选中的是：{{ fruit }}</p>
+    <!-- 2.选择多个 -->
+    <!-- 可以选中多个值，v-model绑定的是一个数组，当选中多个值时，就会将选中的option对应的value添加到data的数组中 -->
+    <select name="fruits" v-model="fruits" multiple>
+      <option value="苹果">苹果</option>
+      <option value="香蕉">香蕉</option>
+      <option value="西瓜">西瓜</option>
+    </select>
+    <p>你选中的是：{{ fruits }}</p>
+  </div>
+  <script src='../JS/vue.js'></script>
+  <script>
+    const app = new Vue({
+      el: '#app',
+      data: {
+        fruit: '苹果',
+        fruits:[]
+      }
+    });
+  </script>
+</body>
+</html>

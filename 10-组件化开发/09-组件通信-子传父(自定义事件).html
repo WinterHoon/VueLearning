@@ -1,0 +1,54 @@
+<!-- 当子组件需要向父组件传递数据时，就要用到自定义事件了 -->
+<!-- v-on不仅可以用来监听DOM事件，也可以用来监听组件间的自定义事件 -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <!-- 把vue实例当成父组件 -->
+  <div id='app'>
+    <cpn @itemclick="cpnClick"></cpn>
+  </div>
+  <!-- 子组件模板 -->
+  <template id="cpn">
+    <div>
+      <button v-for="item in categories" @click="btnClick(item)">{{ item.name }}</button>
+    </div>
+  </template>
+  <script src='../JS/vue.js'></script>
+  <script>
+    const app = new Vue({
+      el: '#app',
+      components: {
+        cpn: {
+          template: '#cpn',
+          data() {
+            return {
+              categories: [
+                {id: 'aaa', name: '热门推荐'},
+                {id: 'bbb', name: '手机数码'},
+                {id: 'ccc', name: '家用家电'},
+                {id: 'ddd', name: '电脑办公'},
+              ]
+            }
+          },
+          methods: {
+            btnClick(item) {
+              // 发射事件，自定义事件
+              this.$emit('itemclick',item);
+            }
+          }
+        }
+      },
+      methods: {
+        cpnClick(item) {
+          console.log(item.name);
+        }
+      }
+    });
+  </script>
+</body>
+</html>

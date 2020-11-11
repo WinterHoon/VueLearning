@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <div id='app'>
+    <!-- 1.checkbox单个勾选框 -->
+    <!-- 当单个勾选框绑定v-model的值时，v-model的值为布尔值，此时input的value并不影响v-model的值 -->
+    <label for="lisence">
+      <input type="checkbox" id="lisence" v-model="isAgree">用户协议
+    </label>
+    <p>你选择的是：{{ isAgree }}</p>
+    <button v-bind:disabled="!isAgree">下一步</button>
+
+    <!-- 2.checkbox多个勾选框 -->
+    <!-- 当v-model绑定多个勾选框时，因为可以选中多个，所以对应data中一个数组，当选中其中一个时，就会将该input的value添加到数组中 -->
+    <br>
+    <br>
+    <input type="checkbox" value="足球" v-model="hobbies">足球
+    <input type="checkbox" value="篮球" v-model="hobbies">篮球
+    <input type="checkbox" value="乒乓球" v-model="hobbies">乒乓球
+    <input type="checkbox" value="羽毛球" v-model="hobbies">羽毛球
+    <p>您的爱好是：{{ hobbies }}</p>
+  </div>
+  <script src='../JS/vue.js'></script>
+  <script>
+    const app = new Vue({
+      el: '#app',
+      data: {
+        isAgree: false,
+        hobbies: []
+      }
+    });
+  </script>
+</body>
+</html>

@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <div id='app'>
+    <counter-cpn></counter-cpn>
+    <counter-cpn></counter-cpn>
+    <counter-cpn></counter-cpn>
+  </div>
+  
+  <template id="counter-cpn">
+    <div>
+      <h2>当前计数：{{ counter }}</h2>
+      <button @click="increment">+</button>
+      <button v-on:click="decrement">-</button>
+    </div>
+  </template>
+  <script src='../JS/vue.js'></script>
+  <script>
+    Vue.component('counter-cpn',{
+      template: '#counter-cpn',
+      // data是函数然后返回对象的话，这样组件在复用的时候，每个组件使用的数据都是独立的，而不是共享的
+      data() {
+        return {
+          counter: 0
+        }
+      },
+      methods: {
+        increment() {
+          this.counter++;
+        },
+        decrement() {
+          this.counter--;
+        }
+      }
+    });
+    const app = new Vue({
+      el: '#app'
+    });
+  </script>
+</body>
+</html>

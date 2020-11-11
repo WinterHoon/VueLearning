@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <div id='app'>
+    <!-- 1.lazy修饰符 -->
+    <!-- lazy修饰符可以让数据只在失去焦点和回车的时候才会更新 -->
+    <input type="text" v-model.lazy="message">
+    <h1>{{ message }}</h1>
+    <!-- 2.number修饰符 -->
+    <!-- number修饰符可以让在输入框中的内容自动转成数字类型 -->
+    <input type="number" v-model.number="age">
+    <h2>{{ typeof age}}</h2>
+    <!-- 3.trim修饰符 -->
+    <!-- trim修饰符可以过滤内容左右两侧的空格 -->
+    <input type="text" v-model.trim="name">
+    <h2>您输入的是：{{ name }}</h2>
+  </div>
+  <script src='../JS/vue.js'></script>
+  <script>
+    const app = new Vue({
+      el: '#app',
+      data: {
+        message: 'HelloWinter',
+        age: 0,
+        name: ''
+      }
+    });
+  </script>
+</body>
+</html>

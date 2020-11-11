@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <div id='app'>
+    <cpn :cmessage="message" ></cpn>
+  </div>
+  <template id="cpn">
+    <div>
+      <h2>{{ cmessage }}</h2>
+      <ul>
+        <li v-for="item in cmovies">{{ item }}</li>
+      </ul>
+    </div>
+  </template>
+  <script src='../JS/vue.js'></script>
+  <script>
+    const app = new Vue({
+      el: '#app',
+      data: {
+        message: 'HelloWinter',
+        movies:['海王','海贼王','海尔兄弟']
+      },
+      components: {
+        cpn: {
+          template: '#cpn',
+          // 在组件中，使用选项props来声明需要从父级接收到的数据
+          // props的值有两种方式：
+          // 方式一：字符串数组，数组中的字符串就是传递时的名称
+            // props: ['cmessage','cmovies']
+          // 方式二：对象，对象可以设置传递时的类型，也可以设置默认值等
+          // 指定类型的方式
+          // props: {
+          //   cmessage: String,
+          //   cmovies: Array
+          // }
+          //指定类型和默认值的方式
+          props: {
+            cmessage: {
+              type: String,
+              default: "aaaaaa",
+              required: true
+            },
+            cmovies: {
+              type: Array,
+              // 类型是对象或数组时，默认值必须是一个函数，感觉跟组件中data必须是函数一样，也是为了防止组件复用的时候共用数据
+              default() {
+                return []
+              }
+            }
+          }
+        }
+      }
+    });
+  </script>
+</body>
+</html>

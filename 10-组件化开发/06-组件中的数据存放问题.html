@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <div id='app'>
+    <h1>{{ message }}</h1>
+    <cpn></cpn>
+  </div>
+  <template id="cpn">
+    <div>
+      <h2>我是一个组件</h2>
+      <p>我是内容: {{ message }}</p>
+    </div>
+  </template>
+  <script src='../JS/vue.js'></script>
+  <script>
+    // 组件对象也有一个data属性，只是这个data属性必须是一个函数，而且这个函数返回一个对象，对象内部保存着数据
+
+    const app = new Vue({
+      el: '#app',
+      data: {
+        message: 'HelloWinter'
+      },
+      components: {
+        cpn: {
+          template: '#cpn',
+          data() {
+            return {
+              message: "helloworld!"
+            }
+          }
+        }
+      }
+    });
+  </script>
+</body>
+</html>

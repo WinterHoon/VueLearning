@@ -13,7 +13,7 @@
 <body>
   <div id='app'>
     <h1>{{ title }}</h1>
-    <ul>
+    <ul v-on:mouseout="currentIndex = -1">
       <li v-bind:class="{active: index === currentIndex}" v-for="(item,index) in movies" v-on:mouseover="currentIndex = index">{{ item }}</li>
     </ul>
   </div>
@@ -24,7 +24,7 @@
       data: {
         title: '云顶之弈S4常用套路',
         movies: ['夜幽锐雯', '重装秘术', '森林斗猎', '决斗宗师', '明昼劫'],
-        currentIndex: 0
+        currentIndex: -1
       }
     });
   </script>

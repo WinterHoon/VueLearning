@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <!-- 表单控件在实际开发中是非常常见的，特别是对于用户信息的提交，需要大量的表单。vue中使用v-model来实现表单元素和数据的双向绑定 -->
+  <div id="app">
+    <input type="text" v-model="message">
+    <h2>{{ message }}</h2>
+    <textarea name="" id="" cols="30" rows="10" v-model="information"></textarea>
+    <p>输入的内容是：{{ information }}</p>
+  </div>
+  <script src="../JS/vue.js"></script>
+  <script>
+    const app = new Vue({
+      el: "#app",
+      data: {
+        message: "你好啊",
+        information: ''
+      }
+    });
+  </script>
+</body>
+</html>

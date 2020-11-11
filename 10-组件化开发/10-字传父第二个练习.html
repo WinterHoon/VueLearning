@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <!-- 父组件 -->
+  <div id='app'>
+    <child-cpn @increment="changeTotal" @decrement="changeTotal"></child-cpn>
+    <h2>点击次数：{{ total }}</h2>
+  </div>
+
+  <!-- 子组件模板 -->
+  <template id="child-cpn">
+    <div>
+      <button @click="increment">+</button>
+      <button @click="decrement">-</button>
+    </div>
+  </template>
+  <script src='../JS/vue.js'></script>
+  <script>
+    const childCpn = {
+      template: '#child-cpn',
+      data() {
+        return {
+          counter: 0
+        }
+      },
+      methods: {
+        increment() {
+          this.counter++;
+          this.$emit('increment',this.counter);
+        },
+        decrement() {
+          this.counter--;
+          this.$emit('decrement',this.counter);
+        }
+      }
+    }
+    const app = new Vue({
+      el: '#app',
+      data: {
+        total: 0
+      },
+      methods: {
+        changeTotal(counter) {
+          this.total = counter;
+        }
+      },
+      components: {
+        childCpn
+      }
+    });
+  </script>
+</body>
+</html>
