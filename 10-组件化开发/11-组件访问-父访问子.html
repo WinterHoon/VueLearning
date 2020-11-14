@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <div id='app'>
+    <child-cpn ref="child"></child-cpn>
+    <button @click="btnClick">按钮</button>
+  </div>
+
+  <template id="cpn">
+    <div>
+      <h2>我是子组件</h2>
+      <p>我是内容</p>
+    </div>
+  </template>
+  <script src='../JS/vue.js'></script>
+  <script>
+    const app = new Vue({
+      el: '#app',
+      data: {
+        message: 'HelloWinter'
+      },
+      methods: {
+        btnClick() {
+          // 通过$children的方式，但不常用
+          console.log(this.$children[0].name);
+          // 通过$refs的方式，常用
+          console.log(this.$refs.child.name);
+        }
+      },
+      components: {
+        "child-cpn": {
+          template: '#cpn',
+          data() {
+            return {
+              name: "Winter"
+            }
+          }
+        }
+      }
+    });
+  </script>
+</body>
+</html>

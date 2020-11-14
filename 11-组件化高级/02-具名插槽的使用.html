@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <div id='app'>
+    <!-- 不指定的话，会替换所有没有名字的插槽 -->
+    <cpn v-slot:left><button>按钮</button></cpn>
+  </div>
+
+  <template id="cpn">
+    <div>
+      <slot name="left">左边</slot>
+      <slot name="center">中间</slot>
+      <slot name="right">右边</slot>
+      <slot></slot>
+    </div>
+  </template>
+  <script src='../JS/vue.js'></script>
+  <script>
+    const app = new Vue({
+      el: '#app',
+      data: {
+        message: 'HelloWinter'
+      },
+      components: {
+        cpn: {
+          template: '#cpn'
+        }
+      }
+    });
+  </script>
+</body>
+</html>
