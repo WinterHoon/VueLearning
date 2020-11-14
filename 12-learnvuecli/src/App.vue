@@ -1,28 +1,31 @@
 <template>
   <div id="app">
-    <img alt="Vue logo" src="./assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
+    <h2>我是APP组件</h2>
+    <!-- <router-link to="/home" tag="button" replace>首页</router-link> -->
+    <!-- <router-link to="/about" tag="button" replace>关于</router-link> -->
+    <button @click="homeClick">首页</button>
+    <button @click="aboutClick">关于</button>
+    <h2>我是Hello World</h2>
+    <router-view></router-view>
   </div>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
-
 export default {
   name: 'App',
-  components: {
-    HelloWorld
+  methods: {
+    homeClick() {
+      this.$router.push('/home')
+    },
+    aboutClick() {
+      this.$router.push('/about')
+    }
   }
 }
 </script>
 
 <style>
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
-}
+  .active {
+    color: #f00;
+  }
 </style>
