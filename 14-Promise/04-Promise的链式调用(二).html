@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+    new Promise((resolve) => {
+      setTimeout(() => {
+        resolve('aaa')
+      },1000)
+    }).then(res => {
+      console.log(res, '第一层的十行代码');
+      //第一种写法
+      // return new Promise((resolve) => {
+      //   resolve(res+'111');
+      // })
+      
+      //第二种简洁的写法
+      // return Promise.resolve(res+'111');
+
+      //第三种写法，Promise会自动将then中函数的返回值打包成Promise对象
+      return res + '111';
+      // throw 'error message'
+    }).then(res => {
+      console.log(res,'第二层的十行代码');
+      //第一种写法
+      // return new Promise(resolve => {
+      //   resolve(res + '222');
+      // })
+
+      //第二种简洁的写法
+      // return Promise.resolve(res+'222');
+
+      //第三种写法，Promise会自动将then中函数的返回值打包成Promise对象
+      return res + '222';
+    }).then(res => {
+      console.log(res, '第三层的十行处理代码');
+    }).catch(err => {
+      console.log(err);
+    })
+      
+  </script>
+</body>
+</html>

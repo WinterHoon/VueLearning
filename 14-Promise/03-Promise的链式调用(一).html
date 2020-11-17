@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+    new Promise((resolve,reject) => {
+      setTimeout(() => {
+        resolve();
+      }, 1000);
+    }).then(() => {
+      console.log('Hello world');
+      console.log('Hello world');
+      console.log('Hello world');
+      
+      return new Promise((resolve,reject) => {
+        setTimeout(() => {
+          resolve();
+        }, 1000);
+      }).then(() => {
+        console.log('Hello Vue');
+        console.log('Hello Vue');
+        console.log('Hello Vue');
+        
+        return new Promise((resolve,reject) => {
+          setTimeout(() => {
+            resolve();
+          }, 1000);
+        }).then(() => {
+          console.log('Hello Promise');
+          console.log('Hello Promise');
+          console.log('Hello Promise');
+        })
+      })
+    })
+  </script>
+</body>
+</html>
