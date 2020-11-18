@@ -11,7 +11,7 @@ new Vue({
 //4.使用全局的axios和相应的配置进行网络请求
 
 // // 3.axios的全局配置
-// axios.defaults.baseURL = 'http://152.136.185.210:8000/api/w6';
+// axios.defaults.baseURL = '';
 // axios.defaults.timeout = 5000;
 // // 1.axios的基本使用
 // axios({
@@ -47,7 +47,7 @@ new Vue({
 // 5.创建axios实例
 
 // const axios1 = axios.create({
-//   baseURL: 'http://152.136.185.210:8000/api/w6',
+//   baseURL: '',
 //   timeout: 5000
 // })
 
