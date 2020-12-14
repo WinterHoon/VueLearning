@@ -28,25 +28,41 @@
     },
     methods: {
       scrollTo(x, y, ms = 300) {
-        this.bsScroll.scrollTo(x, y, ms);
+        this.bsScroll && this.bsScroll.scrollTo(x, y, ms);
       },
       finishPullUp() {
-        this.bsScroll.finishPullUp();
+        this.bsScroll && this.bsScroll.finishPullUp();
+      },
+      refresh() {
+        // console.log('----');
+        this.bsScroll && this.bsScroll.refresh();
+      },
+      getScrollY() {
+        return this.bsScroll ? this.bsScroll.y : 0;
       }
     },
     mounted() {
+      //创建BScroll对象
       BScroll.use(Pullup);
       this.bsScroll = new BScroll(this.$refs.wrapper, {
          click: true,
          probeType: this.probeType,
          pullUpLoad: this.pullUpLoad
       })
-      this.bsScroll.on('scroll', position => {
-        this.$emit('scroll', position);
-      })
-      this.bsScroll.on('pullingUp',() => {
-        this.$emit('pullingUp');
-      })
+      console.log(this.bsScroll);
+      //监听滚动的位置
+      if (this.probeType === 2 || this.probeType === 3) {
+        this.bsScroll.on('scroll', position => {
+          this.$emit('scroll', position);
+        })
+      }
+
+      //监听滚动到底部
+      if (this.pullUpLoad) {
+        this.bsScroll.on('pullingUp',() => {
+          this.$emit('pullingUp');
+        })
+      }
     }
   }
 </script>

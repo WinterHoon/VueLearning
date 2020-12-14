@@ -1,6 +1,6 @@
 <!-- 用最新的swiper不知道为什么总是出错，
 结合着https://github.com/surmon-china/vue-awesome-swiper/tree/v3.1.3
-和cnblogs.com/wangyihong/p/13393469.html才实现成功 -->
+和https://cnblogs.com/wangyihong/p/13393469.html才实现成功 -->
 
 <!-- The ref attr used to find the swiper instance -->
 <template>
@@ -8,7 +8,7 @@
     <!-- slides -->
     <swiper-slide v-for="(item,index) in banners" :key="index">
       <a :href="item.link">
-        <img :src="item.image" alt="" width="100%">
+        <img :src="item.image" alt="" width="100%" @load="imageLoad">
       </a>
     </swiper-slide>
     <!-- Optional controls -->
@@ -48,12 +48,21 @@ export default {
           prevEl: ".swiper-button-prev",
           hideOnClick: true
         }
-      }
+      },
+      imageIsLoad: false
     }
   },
-  computed: {
-    swiper() {
-      return this.$refs.mySwiper.swiper
+  // computed: {
+  //   swiper() {
+  //     return this.$refs.mySwiper.swiper
+  //   }
+  // },
+  methods: {
+    imageLoad() {
+      if (!this.imageIsLoad) {
+        this.$emit('swiperImageLoad');
+        this.imageIsLoad = true;
+      }
     }
   },
   mounted() {
