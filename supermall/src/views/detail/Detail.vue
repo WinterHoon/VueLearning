@@ -25,6 +25,8 @@ import DetailParamInfo from './childComponents/DetailParamInfo.vue';
 import DetailCommentInfo from './childComponents/DetailCommentInfo.vue';
 import GoodsList from '../../components/content/goods/GoodsList.vue';
 
+import { debounce } from 'common/utils';
+import { itemListenerMixin } from 'common/mixin'
 
 export default {
   components: { 
@@ -39,6 +41,7 @@ export default {
     GoodsList 
   },
   name: "Detail",
+  mixins: [itemListenerMixin],
   data() {
     return {
       iid: null,
@@ -93,6 +96,8 @@ export default {
       this.recommends = res.data.list;
     })
   },
+  mounted() {
+  },
   activated() {
     console.log('activated');
   },
@@ -100,7 +105,7 @@ export default {
     console.log('deactivated');
   },
   destroyed() {
-    console.log('destroyed');
+    this.$bus.$off('itemImageLoad', this.itemImgListener);
   }
 }
 </script>

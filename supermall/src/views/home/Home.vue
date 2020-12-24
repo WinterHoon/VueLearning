@@ -38,6 +38,7 @@ import HomeRecommendView from './childComponents/HomeRecommendView.vue'
 import FeatureView from './childComponents/FeatureView.vue'
 
 import { debounce } from 'common/utils'
+import { itemListenerMixin } from 'common/mixin'
 
 export default {
   name: 'Home',
@@ -52,6 +53,7 @@ export default {
     GoodsList,
 
   },
+  mixins: [itemListenerMixin],
   data() {
     return {
       banners: [],
@@ -138,13 +140,6 @@ export default {
     // })
   },
   mounted() {
-    //监听item中图片加载完成
-    const refresh = debounce(this.$refs.scroll.refresh, 50);
-    this.$bus.$on('itemImageLoad', () => {
-      // this.$refs.scroll && this.$refs.scroll.refresh();
-      refresh();
-    })
-
   },
   destroyed() {
     console.log('home destroyed');
@@ -154,7 +149,11 @@ export default {
     this.$refs.scroll.refresh();
   },
   deactivated() {
+    //保存滚动到的Y值
     this.saveY = this.$refs.scroll.getScrollY();
+
+    //取消全局事件的监听
+    this.$bus.$off('itemImgLoad', this.itemImgListener);
   }
 }
 </script>

@@ -34,7 +34,7 @@
         this.bsScroll && this.bsScroll.finishPullUp();
       },
       refresh() {
-        // console.log('----');
+        console.log('我是refresh');
         this.bsScroll && this.bsScroll.refresh();
       },
       getScrollY() {
