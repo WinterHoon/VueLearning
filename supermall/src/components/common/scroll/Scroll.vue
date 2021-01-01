@@ -34,7 +34,7 @@
         this.bsScroll && this.bsScroll.finishPullUp();
       },
       refresh() {
-        console.log('我是refresh');
+        // console.log('我是refresh');
         this.bsScroll && this.bsScroll.refresh();
       },
       getScrollY() {
@@ -49,7 +49,7 @@
          probeType: this.probeType,
          pullUpLoad: this.pullUpLoad
       })
-      console.log(this.bsScroll);
+      // console.log(this.bsScroll);
       //监听滚动的位置
       if (this.probeType === 2 || this.probeType === 3) {
         this.bsScroll.on('scroll', position => {

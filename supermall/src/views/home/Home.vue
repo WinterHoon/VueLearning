@@ -20,15 +20,14 @@
       ref="tabControl2"/>
       <goods-list :goods="showGoods"/>
     </scroll>
-    <back-top @click.native="backTopClick" v-show="showBackTop"/>
+    <back-top @click.native="backTopClick" v-show="isShowBackTop"/>
   </div>
 </template>
 
 <script>
 import NavBar from 'components/common/navbar/NavBar'
-import TabControl from '../../components/content/tabControl/TabControl.vue'
+import TabControl from 'components/content/tabControl/TabControl.vue'
 import Scroll from 'components/common/scroll/Scroll.vue'
-import BackTop from '../../components/content/backtop/BackTop.vue'
 
 import { getHomeMultidata, getHomeGoodsData } from 'network/home'
 
@@ -38,7 +37,7 @@ import HomeRecommendView from './childComponents/HomeRecommendView.vue'
 import FeatureView from './childComponents/FeatureView.vue'
 
 import { debounce } from 'common/utils'
-import { itemListenerMixin } from 'common/mixin'
+import { itemListenerMixin, backTopMixin} from 'common/mixin'
 
 export default {
   name: 'Home',
@@ -46,14 +45,13 @@ export default {
     NavBar,
     TabControl,
     Scroll,
-    BackTop,
     HomeSwiper,
     HomeRecommendView,
     FeatureView,
     GoodsList,
 
   },
-  mixins: [itemListenerMixin],
+  mixins: [itemListenerMixin, backTopMixin],
   data() {
     return {
       banners: [],
@@ -64,7 +62,6 @@ export default {
         'sell': {page: 0, list: []}
       },
       currentType: 'pop',
-      showBackTop: false,
       tabOffsetTop: 0,
       isTabFixed: false,
       saveY: 0
@@ -88,13 +85,9 @@ export default {
       this.$refs.tabControl1.currentIndex = index;
       this.$refs.tabControl2.currentIndex = index;
     },
-    backTopClick() {
-      console.log('backtop');
-      this.$refs.scroll.scrollTo(0,0,500);
-    },
     contentScroll(position) {
       //1.判断backTop是否显示
-      this.showBackTop = -position.y > 1000;
+      this.isShowBackTop = -position.y > 1000;
 
       //2.决定tabControl是否吸顶
       this.isTabFixed = -position.y > this.tabOffsetTop;
@@ -158,7 +151,7 @@ export default {
 }
 </script>
 
-<style>
+<style scoped>
   #home {
     /* padding-top: 44px; */
     position: relative;

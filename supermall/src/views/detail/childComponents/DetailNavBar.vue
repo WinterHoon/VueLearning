@@ -24,16 +24,16 @@ export default {
   methods: {
     itemClick(index) {
       this.currentIndex = index;
+      this.$emit('titleClick',index);
     },
     backClick() {
       this.$router.back();
     }
   }
-
 }
 </script>
 
-<style>
+<style scoped>
 .titles {
   display: flex;
   font-size: 14px;

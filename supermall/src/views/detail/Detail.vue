@@ -1,20 +1,21 @@
 <template>
   <div id="detail">
-    <detail-nav-bar></detail-nav-bar>
-    <scroll class="scroll-wrapper" ref="scroll">
+    <detail-nav-bar @titleClick="titleClick" ref="detailNav"/>
+    <scroll class="scroll-wrapper" ref="scroll" :probe-type="3" @scroll="contentScroll" >
       <detail-swiper :top-images="topImages" @swiperImageLoad="swiperImageLoad"/>
       <detail-base-info :goods-info="goodsInfo"/>
       <detail-shop-info :shop="shop"/>
       <detail-goods-info :detail-info="detailInfo" @imageLoad="imageLoad"/>
-      <detail-param-info :param-info="paramInfo"/>
-      <detail-comment-info :comment-info="commentInfo"/>
-      <goods-list :goods="recommends" />
+      <detail-param-info :param-info="paramInfo" ref="params"/>
+      <detail-comment-info :comment-info="commentInfo" ref="comments"/>
+      <goods-list :goods="recommends" ref="recommends"/>
     </scroll>
+    <detail-bottom-bar @addToCart="addToCart"/>
+    <back-top @click.native="backTopClick" v-show="isShowBackTop"/>
   </div>
 </template>
 
 <script>
-import { getDetail, GoodsInfo, Shop, GoodsParam, getRecommends } from 'network/detail';
 import DetailNavBar from './childComponents/DetailNavBar.vue';
 import DetailSwiper from './childComponents/DetailSwiper.vue';
 import DetailBaseInfo from './childComponents/DetailBaseInfo.vue';
@@ -23,10 +24,14 @@ import Scroll from '../../components/common/scroll/Scroll.vue';
 import DetailGoodsInfo from './childComponents/DetailGoodsInfo.vue';
 import DetailParamInfo from './childComponents/DetailParamInfo.vue';
 import DetailCommentInfo from './childComponents/DetailCommentInfo.vue';
+import DetailBottomBar from './childComponents/DetailBottomBar.vue';
 import GoodsList from '../../components/content/goods/GoodsList.vue';
 
+import { getDetail, GoodsInfo, Shop, GoodsParam, getRecommends } from 'network/detail';
 import { debounce } from 'common/utils';
-import { itemListenerMixin } from 'common/mixin'
+import { itemListenerMixin, backTopMixin } from 'common/mixin'
+
+import { mapActions } from 'vuex'
 
 export default {
   components: { 
@@ -38,10 +43,11 @@ export default {
     DetailGoodsInfo,
     DetailParamInfo,
     DetailCommentInfo,
-    GoodsList 
+    GoodsList,
+    DetailBottomBar
   },
   name: "Detail",
-  mixins: [itemListenerMixin],
+  mixins: [itemListenerMixin, backTopMixin],
   data() {
     return {
       iid: null,
@@ -51,15 +57,64 @@ export default {
       detailInfo: {},
       paramInfo: {},
       commentInfo: {},
-      recommends: []
+      recommends: [],
+      themeTopYs: [0, 1000, 2000, 3000],
+      scrollIndex: 0,
     }
   },
   methods: {
+    ...mapActions(['addCart']),
     swiperImageLoad() {
       this.$refs.scroll.refresh();
     },
     imageLoad() {
       this.$refs.scroll.refresh();
+      this.themeTopYs = [];
+      this.themeTopYs.push(0);
+      this.themeTopYs.push(this.$refs.params.$el.offsetTop);
+      this.themeTopYs.push(this.$refs.comments.$el.offsetTop);
+      this.themeTopYs.push(this.$refs.recommends.$el.offsetTop);
+      // console.log(this.$refs.params.$el.offsetParent);
+      // console.log(this.themeTopYs);
+    },
+    titleClick(index) {
+      // console.log(index);
+      this.$refs.scroll.scrollTo(0,-this.themeTopYs[index]);
+    },
+    contentScroll(position) {
+      // console.log(-position.y);
+      let y = -position.y;
+      const border1 = this.themeTopYs[0];
+      const border2 = this.themeTopYs[1];
+      const border3 = this.themeTopYs[2];
+      const border4 = this.themeTopYs[3];
+      if (y >= border1 && y < border2) {
+        this.scrollIndex = 0;
+      } else if (y >= border2 && y < border3) {
+        this.scrollIndex = 1;
+      } else if (y >= border3 && y < border4) {
+        this.scrollIndex = 2;
+      } else {
+        this.scrollIndex = 3;
+      }
+      this.$refs.detailNav.currentIndex = this.scrollIndex;
+
+      //2.判断backTop是否显示
+      this.isShowBackTop = y > 1000;
+    },
+    addToCart() {
+      //1.获取购物车需要展示的信息
+      const product = {};
+      product.image = this.topImages[0];
+      product.title = this.goodsInfo.title;
+      product.desc = this.goodsInfo.desc;
+      product.price = this.goodsInfo.realPrice;
+      product.iid = this.iid;
+
+      //2.将商品添加到购物车里
+      this.addCart(product).then(res => {
+        this.$toast.show(res);
+      });
     }
   },
   created() {
@@ -89,14 +144,23 @@ export default {
       if (data.rate.cRate !== 0) {
         this.commentInfo = data.rate.list[0];
       }
+
+      this.$nextTick(() => {
+
+      })
     })
 
     // 3.请求推荐数据
     getRecommends().then(res => {
       this.recommends = res.data.list;
     })
+    
+  },
+  updated() {
+
   },
   mounted() {
+
   },
   activated() {
     console.log('activated');
@@ -110,7 +174,7 @@ export default {
 }
 </script>
 
-<style>
+<style scoped>
   #detail {
     position: relative;
     z-index: 9;
@@ -118,13 +182,13 @@ export default {
     height: 100vh;
   }
   .scroll-wrapper {
-    height: calc(100% - 44px);
+    /* height: calc(100% - 44px); */
 
     overflow: hidden;
-    /* position: absolute;
+    position: absolute;
     top: 44px;
-    bottom: 0;
+    bottom: 49px;
     left: 0;
-    right: 0; */
+    right: 0;
   }
 </style>

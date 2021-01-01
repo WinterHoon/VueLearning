@@ -50,7 +50,7 @@ export default {
 }
 </script>
 
-<style>
+<style scoped>
   .comment-info {
     padding: 5px 12px;
     color: #333;
