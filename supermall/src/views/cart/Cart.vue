@@ -5,7 +5,7 @@
       <div slot="center">购物车({{ cartLength }})</div>
     </nav-bar>
     <!-- 商品列表 -->
-    <cart-list />
+      <cart-list />
     <!-- 底部汇总 -->
     <cart-bottom-bar/>
   </div>

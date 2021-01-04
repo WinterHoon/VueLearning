@@ -29,7 +29,7 @@ export default {
 
 <style scoped>
   .cart-list {
-    height: calc(100% - 44px - 49px - 40px);
+    height: calc(100% - 44px - 40px - 54PX); /*大写PX在浏览器中生效但不会被px2viewport转换*/
   }
   .scroll-wrapper {
     height: 100%;
